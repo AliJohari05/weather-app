@@ -59,7 +59,7 @@ It is built with **Material Design 3** and features attractive icons and graphic
 
 ## 📦 Installation & Run
 1. Clone the repository:
-   git clone https://github.com/USERNAME/WeatherApp.git
+   git clone https://github.com/AliJohari05/weather-app.git
 
 2. Open the project in Android Studio.
 
