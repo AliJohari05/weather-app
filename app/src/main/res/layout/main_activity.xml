@@ -1,306 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    android:orientation="vertical">
+    android:background="@drawable/bg_gradient"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="34sp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewtemp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_weight="55"
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textSize="38sp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="45"
-            android:paddingRight="115dp"
-            app:srcCompat="@drawable/celsius" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewWeather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewSunrise"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textAlignment="center"
-            android:textColor="#FF9800"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/sunrise" />
+            <!-- نام شهر -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tehran"
+                android:textColor="@android:color/white"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewSunset"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textAlignment="center"
-            android:textColor="#FF9800"
-            android:textSize="16sp" />
+            <!-- آیکون وضعیت -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/sunset" />
-    </LinearLayout>
+            <!-- دما -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textViewtemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25"
+                    android:textColor="@android:color/white"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewTempMin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="3"
-            android:textAlignment="center"
-            android:textColor="#2196F3"
-            android:textSize="18sp" />
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/celsius" />
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/tempdown" />
+            <!-- توضیح وضعیت -->
+            <TextView
+                android:id="@+id/textViewWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Clear Sky"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textViewTempMax"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="3"
-            android:textAlignment="center"
-            android:textColor="#E0291C"
-            android:textSize="18sp" />
+            <!-- کارت جزئیات -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/tempup" />
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+                    <!-- Sunrise -->
+                    <LinearLayout
+                        style="@style/WeatherRow">
+                        <ImageView
+                            style="@style/WeatherIcon"
+                            android:src="@drawable/sunrise" />
+                        <TextView
+                            android:id="@+id/textViewSunrise"
+                            style="@style/WeatherText"
+                            android:text="Sunrise: 06:12 AM" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewpressure"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="35"
-            android:textAlignment="center"
-            android:textColor="#009688"
-            android:textSize="18sp" />
+                    <!-- Sunset -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/sunset" />
+                        <TextView
+                            android:id="@+id/textViewSunset"
+                            style="@style/WeatherText"
+                            android:text="Sunset: 06:45 PM" />
+                    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/lowtide" />
+                    <!-- Temp Min -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/tempdown" />
+                        <TextView
+                            android:id="@+id/textViewTempMin"
+                            style="@style/WeatherText"
+                            android:text="Temp Min: 15°C" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewhumidity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="35"
-            android:textAlignment="center"
-            android:textColor="#4527A0"
-            android:textSize="18sp" />
+                    <!-- Temp Max -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/tempup" />
+                        <TextView
+                            android:id="@+id/textViewTempMax"
+                            style="@style/WeatherText"
+                            android:text="Temp Max: 30°C" />
+                    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="15"
-            app:srcCompat="@drawable/humidity" />
-    </LinearLayout>
+                    <!-- Humidity -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/humidity" />
+                        <TextView
+                            android:id="@+id/textViewhumidity"
+                            style="@style/WeatherText"
+                            android:text="Humidity: 60%" />
+                    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+                    <!-- Wind -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/wind" />
+                        <TextView
+                            android:id="@+id/textViewwind"
+                            style="@style/WeatherText"
+                            android:text="Wind Speed: 5 m/s" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewsealevel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textColor="#00695C"
-            android:textSize="18sp" />
+                    <!-- Sea Level -->
+                    <LinearLayout style="@style/WeatherRow">
+                        <ImageView style="@style/WeatherIcon" android:src="@drawable/lowtide" />
+                        <TextView
+                            android:id="@+id/textViewsealevel"
+                            style="@style/WeatherText"
+                            android:text="Sea Level: --" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/textViewgrndlevel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textColor="#00695C"
-            android:textSize="18sp" />
+            <!-- جستجو -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="Enter city">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewwind"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="4"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Search"
+                    style="@style/Widget.Material3.Button.IconButton.Outlined" />
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/wind" />
+            <!-- ProgressBar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/textViewdeg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="4"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/editTextCity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/edit_text_background"
-            android:hint="Enter city name"
-            android:padding="8dp"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00838F"
-            android:onClick="searchCity"
-            android:text="Search"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageViewreload"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_weight="0.5"
-            android:background="@color/teal_700"
-            android:onClick="reloadData"
-            app:srcCompat="@drawable/reload" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_weight="4"
-            android:visibility="invisible" />
-
-    </LinearLayout>
-
-</LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

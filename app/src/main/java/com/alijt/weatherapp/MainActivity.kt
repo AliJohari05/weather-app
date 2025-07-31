@@ -1,71 +1,61 @@
 package com.alijt.weatherapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alijt.weatherapp.databinding.MainActivityBinding
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import com.bumptech.glide.Glide
+import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import com.bumptech.glide.Glide
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: MainActivityBinding
-    private var currentCity: String = "Tehran"
+    private lateinit var binding: MainActivityBinding
+    private var currentCity = "Tehran"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up the search button click listener
         binding.buttonSearch.setOnClickListener {
-            searchCity(it)
+            searchCity()
         }
 
-        getData("Tehran") // Default city
+        getData(currentCity)
     }
 
-    fun setValue(cityName: String, temp: Double, weatherDesc: String, imageUrl: String,
-                 sunrise: String, sunset: String,
-                 tempMin: Double, tempMax: Double, pressure: Int, humidity: Int,
-                 seaLevel: Int, grndLevel: Int, speed: Double, deg: Int
+    private fun setValue(
+        cityName: String,
+        temp: Double,
+        weatherDesc: String,
+        imageUrl: String,
+        sunrise: String,
+        sunset: String,
+        tempMin: Double,
+        tempMax: Double,
+        humidity: Int,
+        speed: Double
     ) {
-        binding.progressBar.visibility = View.INVISIBLE
-        binding.imageViewreload.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
+
         binding.textView.text = cityName
-        binding.textViewtemp.text = kelvinToCelsius(temp).toInt().toString()
+        binding.textViewtemp.text = "${kelvinToCelsius(temp).toInt()}°C"
         binding.textViewWeather.text = weatherDesc
         binding.textViewSunrise.text = "Sunrise: $sunrise"
         binding.textViewSunset.text = "Sunset: $sunset"
-        binding.textViewTempMin.text = "Temp Min: ${kelvinToCelsius(tempMin).toInt()}"
-        binding.textViewTempMax.text = "Temp Max: ${kelvinToCelsius(tempMax).toInt()}"
-        binding.textViewpressure.text = "Pressure: $pressure"
-        binding.textViewhumidity.text = "Humidity: $humidity"
-        binding.textViewsealevel.text = "Sea Level: $seaLevel"
-        binding.textViewgrndlevel.text = "Grnd Level: $grndLevel"
-        binding.textViewwind.text = "Speed: $speed"
-        binding.textViewdeg.text = "Degree: $deg"
+        binding.textViewTempMin.text = "Temp Min: ${kelvinToCelsius(tempMin).toInt()}°C"
+        binding.textViewTempMax.text = "Temp Max: ${kelvinToCelsius(tempMax).toInt()}°C"
+        binding.textViewhumidity.text = "Humidity: $humidity%"
+        binding.textViewwind.text = "Wind: $speed m/s"
 
-        Glide.with(this)
-            .load(imageUrl)
-            .into(binding.imageView)
+        Glide.with(this).load(imageUrl).into(binding.imageView)
     }
 
-    fun kelvinToCelsius(kelvin: Double): Double {
-        return kelvin - 273.15
-    }
+    private fun kelvinToCelsius(kelvin: Double) = kelvin - 273.15
 
     private fun formatTimestamp(timestamp: Long): String {
         val date = Date(timestamp * 1000)
@@ -73,11 +63,10 @@ class MainActivity : AppCompatActivity() {
         return format.format(date)
     }
 
-    fun searchCity(view: View) {
-        val cityName = binding.editTextCity.text.toString()
+    private fun searchCity() {
+        val cityName = binding.editTextCity.text.toString().trim()
         if (cityName.isNotEmpty()) {
             binding.progressBar.visibility = View.VISIBLE
-            binding.imageViewreload.visibility = View.INVISIBLE
             getData(cityName)
             currentCity = cityName
         } else {
@@ -87,16 +76,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun getData(cityName: String) {
         val client = OkHttpClient()
-
         val request = Request.Builder()
             .url("https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=46c8b4f7f8450408e67c90a0e80cd259")
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("HTTP", "Request failed: ${e.message}")
                 runOnUiThread {
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(this@MainActivity, "Failed to get data", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -104,10 +91,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val rawContent = response.body!!.string()
-                    getDataAndShowThem(rawContent)
+                    getDataAndShow(rawContent)
                 } else {
                     runOnUiThread {
-                        binding.progressBar.visibility = View.INVISIBLE
+                        binding.progressBar.visibility = View.GONE
                         Toast.makeText(this@MainActivity, "City not found", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -115,56 +102,39 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getDataAndShowThem(rawContent: String) {
+    private fun getDataAndShow(rawContent: String) {
         val jsonObject = JSONObject(rawContent)
         val weatherArray = jsonObject.getJSONArray("weather")
         val weatherObject = weatherArray.getJSONObject(0)
         val iconId = weatherObject.getString("icon")
         val imageUrl = "https://openweathermap.org/img/wn/${iconId}@2x.png"
+
         val mainObject = jsonObject.getJSONObject("main")
+        val temp = mainObject.getDouble("temp")
         val tempMin = mainObject.getDouble("temp_min")
         val tempMax = mainObject.getDouble("temp_max")
-        val pressure = mainObject.getInt("pressure")
         val humidity = mainObject.getInt("humidity")
-        val seaLevel = mainObject.getInt("sea_level")
-        val grndLevel = mainObject.getInt("grnd_level")
-        val sysObject = jsonObject.getJSONObject("sys")
+
         val windObject = jsonObject.getJSONObject("wind")
         val speed = windObject.getDouble("speed")
-        val deg = windObject.getInt("deg")
 
-        val sunriseTimestamp = sysObject.getLong("sunrise")
-        val sunsetTimestamp = sysObject.getLong("sunset")
-
-        val sunriseTime = formatTimestamp(sunriseTimestamp)
-        val sunsetTime = formatTimestamp(sunsetTimestamp)
+        val sysObject = jsonObject.getJSONObject("sys")
+        val sunrise = formatTimestamp(sysObject.getLong("sunrise"))
+        val sunset = formatTimestamp(sysObject.getLong("sunset"))
 
         runOnUiThread {
-            setValue(jsonObject.getString("name"), mainObject.getDouble("temp"),
-                weatherObject.getString("description"), imageUrl,
-                sunriseTime, sunsetTime, tempMin, tempMax, pressure, humidity, seaLevel, grndLevel, speed, deg)
+            setValue(
+                jsonObject.getString("name"),
+                temp,
+                weatherObject.getString("description"),
+                imageUrl,
+                sunrise,
+                sunset,
+                tempMin,
+                tempMax,
+                humidity,
+                speed
+            )
         }
-    }
-
-    fun reloadData(view: View) {
-        binding.imageViewreload.visibility = View.INVISIBLE
-        binding.progressBar.visibility = View.VISIBLE
-        binding.textView.text = "--"
-        binding.textViewtemp.text = "--"
-        binding.textViewWeather.text = "--"
-        binding.textViewSunrise.text = "--"
-        binding.textViewSunset.text = "--"
-        binding.textViewTempMin.text = "--"
-        binding.textViewTempMax.text = "--"
-        binding.textViewpressure.text = "--"
-        binding.textViewhumidity.text = "--"
-        binding.textViewsealevel.text = "--"
-        binding.textViewgrndlevel.text = "--"
-        binding.textViewwind.text = "--"
-        binding.textViewdeg.text = "--"
-        Glide.with(this)
-            .load(R.drawable.baseline_refresh_24)
-            .into(binding.imageView)
-        getData(currentCity)
     }
 }
