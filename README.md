@@ -71,29 +71,6 @@ It is built with **Material Design 3** and features attractive icons and graphic
 
 4. Run the app on an emulator or physical device.
 
----
-
-## 📂 Project Structure
-WeatherApp/
-│
-├── app/src/main/java/com/alijt/weatherapp/
-│   ├── MainActivity.kt        # Main app logic
-│
-├── app/src/main/res/layout/
-│   ├── activity_main.xml      # Main UI layout
-│
-├── app/src/main/res/drawable/
-│   ├── bg_gradient.xml        # Gradient background
-│   ├── sunrise.png            # Sunrise icon
-│   ├── sunset.png             # Sunset icon
-│   ├── tempdown.png           # Min temperature icon
-│   ├── tempup.png             # Max temperature icon
-│   ├── humidity.png           # Humidity icon
-│   ├── wind.png               # Wind icon
-│   ├── lowtide.png            # Sea level / pressure icon
-│
-├── README.md                  # This file
-
 
 ---
 
