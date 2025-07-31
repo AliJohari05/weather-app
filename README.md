@@ -21,11 +21,31 @@ It is built with **Material Design 3** and features attractive icons and graphic
 ---
 
 ## 🖼 Preview
-| Main Screen | Search City || Search City |
-|-------------|-------------||-------------|
-| ![Main Screen](app/src/main/res/drawable/weatherAppTehran.png) | ![Search City](app/src/main/res/drawable/weatherAppGeneva.png) || ![Search City](app/src/main/res/drawable/weatherAppManchester.png) |
 
-*(Make sure to add actual screenshots to the `screenshots` folder in the repository)*
+
+
+
+
+
+
+| ![Main Screen](app/src/main/res/drawable/weatherAppTehran.png) | 
+
+
+
+
+
+![Search City](app/src/main/res/drawable/weatherAppGeneva.png) |
+
+
+
+
+
+![Search City](app/src/main/res/drawable/weatherAppManchester.png) |
+
+
+
+
+
 
 ---
 
@@ -74,12 +94,9 @@ WeatherApp/
 │
 ├── README.md                  # This file
 
----
-
-## 📜 License
-This project is licensed under the **MIT License** – feel free to use it for personal or educational purposes.
 
 ---
+
 
 ## 👨‍💻 Developer
 - **Your Name**
