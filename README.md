@@ -76,6 +76,6 @@ It is built with **Material Design 3** and features attractive icons and graphic
 
 
 ## 👨‍💻 Developer
-- **Your Name**
+- **Ali Johari**
 - [GitHub](https://github.com/AliJohari05)
 - [Email](alitehranijohari1384@gmail.com)
